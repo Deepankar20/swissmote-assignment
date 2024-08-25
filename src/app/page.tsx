@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 const ConnectWallet = () => {
   const [isConnected, setIsConnected] = useState(false);
-  const [account, setAccount] = useState<JsonRpcSigner | string>();
+  const [account, setAccount] = useState<string>();
   const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
   const router = useRouter();
 
@@ -20,7 +20,7 @@ const ConnectWallet = () => {
         const accounts = await provider.listAccounts();
         if (accounts.length > 0) {
           setIsConnected(true);
-          setAccount(accounts[0]);
+          setAccount(accounts[0].address);
           setProvider(provider);
         }
       } catch (error) {
